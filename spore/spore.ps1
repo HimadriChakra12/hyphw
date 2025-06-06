@@ -8,7 +8,8 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     exit
 }
 mkdir C:/mwshrooms
-iwr -uri "https://github.com/HimadriChakra12/hyphw/releases/download/0.1.0/hyphw.exe" -Outfile "C:/mwshroom/hyphw.exe"
+iwr -uri "https://github.com/HimadriChakra12/hyphw/releases/download/0.1.0/hyphw.exe" -Outfile "$env:TEMP/hyphw.exe"
+copy-item "$env:TEMP/hyphw.exe" "C:/mwshroom/hyphw.exe"
 $path = "C:/mwshroom"
 try{
     $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
