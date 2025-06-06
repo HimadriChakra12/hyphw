@@ -5,15 +5,20 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "iwr -useb "https://tinyurl.com/hwnvsh" | iex "' -Verb RunAs
     exit
 }
-mkdir "C:/mwshrooms/hyphws/wnvsh" | out-null
+
+$path = "C:/mwshrooms/hyphws/wnvsh"
+if (-not (test-path $path)){
+    mkdir $path | out-null
+}
+
 iwr -uri "https://github.com/HimadriChakra12/wnvsh/releases/download/0.1.0/wnvsh.exe" -OutFile "$env:TEMP/wnvsh.exe" ; copy-item "$env:TEMP/wnvsh.exe" "C:/mwshrooms/hyphws/wnvsh/wnvsh.exe"
+
 if (get-command gsudo){
     write-host "already have gsudo" -ForegroundColor green
 } else {
-PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; [Net.ServicePointManager]::SecurityProtocol = 'Tls12'; iwr -useb https://raw.githubusercontent.com/gerardog/gsudo/master/installgsudo.ps1 | iex"
+    PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; [Net.ServicePointManager]::SecurityProtocol = 'Tls12'; iwr -useb https://raw.githubusercontent.com/gerardog/gsudo/master/installgsudo.ps1 | iex"
 }
 
-$path = "C:/mwshrooms/hyphws/wnvsh"
 try{
     $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
     if ($currentPath -notlike "*$path*"){
