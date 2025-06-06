@@ -14,7 +14,7 @@ if (-not (test-path $path)){
 iwr -uri "https://github.com/HimadriChakra12/wnvsh/releases/download/0.1.0/wnvsh.exe" -OutFile "$env:TEMP/wnvsh.exe" ; copy-item "$env:TEMP/wnvsh.exe" "C:/mwshrooms/hyphws/wnvsh/wnvsh.exe"
 
 if (get-command gsudo){
-    write-host "already have gsudo" -ForegroundColor green
+    write-host "Already have gsudo" -ForegroundColor green
 } else {
     PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; [Net.ServicePointManager]::SecurityProtocol = 'Tls12'; iwr -useb https://raw.githubusercontent.com/gerardog/gsudo/master/installgsudo.ps1 | iex"
 }
