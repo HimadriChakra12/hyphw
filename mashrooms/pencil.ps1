@@ -20,6 +20,7 @@ Write-host "
 +------------------------------------------------------+
 "                         
 write-host "Chopping Wood....." -ForegroundColor cyan
+mkdir "C:/mwshrooms/hyphws/pencil"
 iwr -uri "https://github.com/HimadriChakra12/.Pencil/releases/download/1.0.0/pencil.exe" -OutFile "$env:TEMP/pencil.exe" ; copy-item "$env:TEMP/pencil.exe" "C:/mwshrooms/hyphws/pencil/pencil.exe"
 iwr -uri "https://github.com/HimadriChakra12/.Pencil/releases/download/1.0.0/pen.exe" -OutFile "$env:TEMP/pen.exe" ; copy-item "$env:TEMP/pen.exe" "C:/mwshrooms/hyphws/pencil/pen.exe"
 if (get-command gsudo){

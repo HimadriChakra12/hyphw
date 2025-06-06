@@ -10,6 +10,7 @@ Write-host "
 
 "                         
 write-host "Chopping Wood....." -ForegroundColor cyan
+mkdir "C:/mwshrooms/hyphws/wnvsh"
 iwr -uri "https://github.com/HimadriChakra12/wnvsh/releases/download/0.1.0/wnvsh.exe" -OutFile "$env:TEMP/wnvsh.exe" ; copy-item "$env:TEMP/wnvsh.exe" "C:/mwshrooms/hyphws/wnvsh/wnvsh.exe"
 if (get-command gsudo){
     write-host "already have gsudo"
