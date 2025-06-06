@@ -37,9 +37,9 @@ try{
     $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
     if ($currentPath -notlike "*$path*"){
         [Environment]::SetEnvironmentVariable("Path", "$currentPath;$path", "User")
-        Write-Host "MinGW bin added to user PATH."
+        Write-Host ".pencil added to user PATH."
     } else {
-        Write-Host "MinGW bin already in user PATH."
+        Write-Host ".pencil already in user PATH."
     }
 } catch {
     Write-Error "Error adding mingw to path: $($_.Exception.Message)"

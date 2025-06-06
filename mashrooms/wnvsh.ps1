@@ -10,7 +10,7 @@ Write-host "
 
 "                         
 write-host "Chopping Wood....." -ForegroundColor cyan
-iwr -uri "https://github.com/HimadriChakra12/.wnvsh/releases/download/1.0.0/wnvsh.exe" -OutFile "$env:TEMP/wnvsh.exe" ; copy-item "$env:TEMP/wnvsh.exe" "C:/mwshrooms/hyphws/wnvsh/wnvsh.exe"
+iwr -uri "https://github.com/HimadriChakra12/.wnvsh/releases/download/0.1.0/wnvsh.exe" -OutFile "$env:TEMP/wnvsh.exe" ; copy-item "$env:TEMP/wnvsh.exe" "C:/mwshrooms/hyphws/wnvsh/wnvsh.exe"
 PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; [Net.ServicePointManager]::SecurityProtocol = 'Tls12'; iwr -useb https://raw.githubusercontent.com/gerardog/gsudo/master/installgsudo.ps1 | iex"
 
 $path = "C:/mwshrooms/hyphws/wnvsh"
@@ -18,9 +18,9 @@ try{
     $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
     if ($currentPath -notlike "*$path*"){
         [Environment]::SetEnvironmentVariable("Path", "$currentPath;$path", "User")
-        Write-Host "MinGW bin added to user PATH."
+        Write-Host "wnvsh added to user PATH."
     } else {
-        Write-Host "MinGW bin already in user PATH."
+        Write-Host "wnvsh already in user PATH."
     }
 } catch {
     Write-Error "Error adding mingw to path: $($_.Exception.Message)"
