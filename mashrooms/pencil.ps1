@@ -5,26 +5,12 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "iwr -useb "https://tinyurl.com/hpencil" | iex "' -Verb RunAs
     exit
 }
-Write-host "
-+------------------------------------------------------+
-|                                            ### ###   |
-|                                            ``` ###   |
-|                                           #### ###   |
-|     #######    ###### ## #####   ########  ### ###   |
-|     ##   ###  ##   ##  ###  ### ###        ### ###   |
-|     ##   ###  ######   ###  ### ###        ### ###   |
-|     #######   ##     # ###  ### ###        ### ###   |
-|     ##         ######  ###  ###  ########  ### ####  |
-| ##  ##                                               |
-| ``  ``                                               |
-+------------------------------------------------------+
-"                         
-write-host "Chopping Wood....." -ForegroundColor cyan
-mkdir "C:/mwshrooms/hyphws/pencil"
+mkdir "C:/mwshrooms/hyphws/pencil" | out-null
 iwr -uri "https://github.com/HimadriChakra12/.Pencil/releases/download/1.0.0/pencil.exe" -OutFile "$env:TEMP/pencil.exe" ; copy-item "$env:TEMP/pencil.exe" "C:/mwshrooms/hyphws/pencil/pencil.exe"
+write-host "Chopping Wood....." -ForegroundColor cyan
 iwr -uri "https://github.com/HimadriChakra12/.Pencil/releases/download/1.0.0/pen.exe" -OutFile "$env:TEMP/pen.exe" ; copy-item "$env:TEMP/pen.exe" "C:/mwshrooms/hyphws/pencil/pen.exe"
 if (get-command gsudo){
-    write-host "already have gsudo"
+    write-host "already have gsudo" -ForegroundColor green
 } else {
 PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; [Net.ServicePointManager]::SecurityProtocol = 'Tls12'; iwr -useb https://raw.githubusercontent.com/gerardog/gsudo/master/installgsudo.ps1 | iex"
 }
@@ -33,10 +19,10 @@ try{
     $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
     if ($currentPath -notlike "*$path*"){
         [Environment]::SetEnvironmentVariable("Path", "$currentPath;$path", "User")
-        Write-Host ".pencil added to user PATH."
+        Write-Host ".pencil added to user PATH." -ForegroundColor cyan
     } else {
-        Write-Host ".pencil already in user PATH."
-    }
+        Write-Host ".pencil already in user PATH." -ForegroundColor green
+     }
 } catch {
     Write-Error "Error adding mingw to path: $($_.Exception.Message)"
 }
