@@ -22,3 +22,4 @@ try{
 } catch {
     Write-Error "Error adding mingw to path: $($_.Exception.Message)"
 }
+mkdir C:/mwshrooms/hyphws
