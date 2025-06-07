@@ -7,12 +7,34 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 
 $path = "C:/mwshrooms/hyphws/pencil"
+
+$url1 = "https://github.com/HimadriChakra12/.Pencil/releases/download/1.0.0/pencil.exe" 
+$outfile1 = "$env:TEMP/pencil.exe" 
+$file1 = "C:/mwshrooms/hyphws/pencil/pencil.exe"
+
+$url2 = "https://github.com/HimadriChakra12/.Pencil/releases/download/1.0.0/pen.exe" 
+$outfile2 = "$env:TEMP/pen.exe" 
+$file2 = "C:/mwshrooms/hyphws/pencil/pen.exe"
+
 if (-not (test-path $path)){
     mkdir $path | out-null
 }
 
-iwr -uri "https://github.com/HimadriChakra12/.Pencil/releases/download/1.0.0/pencil.exe" -OutFile "$env:TEMP/pencil.exe" ; copy-item "$env:TEMP/pencil.exe" "C:/mwshrooms/hyphws/pencil/pencil.exe"
-iwr -uri "https://github.com/HimadriChakra12/.Pencil/releases/download/1.0.0/pen.exe" -OutFile "$env:TEMP/pen.exe" ; copy-item "$env:TEMP/pen.exe" "C:/mwshrooms/hyphws/pencil/pen.exe"
+
+iwr -uri $url1 -OutFile $outfile1 ; copy-item $outfile1 $file1
+iwr -uri $url2 -OutFile $outfile2 ; copy-item $outfile2 $file2
+
+try{
+    $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
+    if ($currentPath -notlike "*$path*"){
+        [Environment]::SetEnvironmentVariable("Path", "$currentPath;$path", "User")
+        Write-Host "pencil added to user PATH." -ForegroundColor cyan
+    } else {
+        Write-Host "pencil already in user PATH." -ForegroundColor green
+    }
+} catch {
+    Write-Error "Error adding pencil to path: $($_.Exception.Message)"
+}
 
 if (get-command gsudo){
     write-host "Already have gsudo" -ForegroundColor green
@@ -20,14 +42,3 @@ if (get-command gsudo){
     PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; [Net.ServicePointManager]::SecurityProtocol = 'Tls12'; iwr -useb https://raw.githubusercontent.com/gerardog/gsudo/master/installgsudo.ps1 | iex"
 }
 
-try{
-    $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
-    if ($currentPath -notlike "*$path*"){
-        [Environment]::SetEnvironmentVariable("Path", "$currentPath;$path", "User")
-        Write-Host ".pencil added to user PATH." -ForegroundColor cyan
-    } else {
-        Write-Host ".pencil already in user PATH." -ForegroundColor green
-     }
-} catch {
-    Write-Error "Error adding mingw to path: $($_.Exception.Message)"
-}
