@@ -17,7 +17,8 @@ if (-not (test-path $path)){
 }
 
 
-iwr -uri $url -OutFile $outfile ; copy-item $outfile $file -force
+iwr -uri $url -OutFile $outfile 
+copy-item $outfile $file -force
 
 try{
     $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
