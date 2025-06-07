@@ -8,7 +8,7 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 $path = "C:/mwshrooms/hyphws/wnvsh"
 
-$url = "https://github.com/HimadriChakra12/wnvsh/releases/download/0.2.0/wnvsh.exe" 
+$url = "https://github.com/HimadriChakra12/wnvsh/releases/download/1.0.0/wnvsh.exe" 
 $outfile = "$env:TEMP/wnvsh.exe" 
 $file = "C:/mwshrooms/hyphws/wnvsh/wnvsh.exe"
 
